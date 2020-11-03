@@ -1,144 +1,214 @@
 
+let leftKeyCode = 37;
+let rightKeyCode = 39;
+let upKeyCode = 38;
+let downKeyCode = 40;
+let value;
+
+
 let arr = [
-   {id: '00', name: ''}, {id: '01', name: ''}, {id: '02', name: ''}, {id: '03', name: ''},
-   {id: '10', name: ''}, {id: '11', name: ''}, {id: '12', name: ''}, {id: '13', name: ''},
-   {id: '20', name: ''}, {id: '21', name: ''}, {id: '22', name: ''}, {id: '23', name: ''},
-   {id: '30', name: ''}, {id: '31', name: ''}, {id: '32', name: ''}, {id: '33', name: ''}
+   [ {name: ''}, {name: ''}, {name: ''}, {name: ''} ],
+   [ {name: ''}, {name: ''}, {name: ''}, {name: ''} ],
+   [ {name: ''}, {name: ''}, {name: ''}, {name: ''} ],
+   [ {name: ''}, {name: ''}, {name: ''}, {name: ''} ]
 ]
+
+function toStr(x, y)
+{
+   return `${x}${y}`;
+}
+
+function updateTable()
+{
+   for(let x = 0; x < arr.length; x++)
+   {
+      for(let y = 0; y < arr[x].length; y++)
+      {
+            box = document.getElementById(toStr(x, y));
+            box.innerHTML = arr[x][y].name;
+      }
+   }
+}
+
+let array = [];
+let x;
+let y;
+let box;
+let random;
+let a;
+let r;
 
 function createElements(){
 
-let x = Math.floor(Math.random() * 4);
-let y = Math.floor(Math.random() * 4);
-let box = document.getElementById('' + x + y);
-let index = arr.findIndex(obj => obj.id == '' + x + y);
-box.innerHTML = 2;
-arr[index].name = box.innerHTML;
+   
 
+   for(let x = 0; x < arr.length; x++){
+      for(let y = 0; y < arr[x].length; y++){
+         if(arr[x][y].name == ''){
+            array.push({x: x, y: y})
+         }
+      }
+   }
+
+r = Math.floor(Math.random() * array.length);
+x = array[r].x;
+y = array[r].y;
+box = document.getElementById('' + x + y);
+random = Math.floor(Math.random() * 2);
+random == 0 ? box.innerHTML = 2 : box.innerHTML = 4;
+a = box.innerHTML;
+arr[x][y].name = box.innerHTML;
+
+array = [];
 document.onkeydown = checkKey;
-
-function checkKey(e) 
-{
-
-   e = e || window.event;
-
-   if (e.keyCode == '38') 
-   {    
-      box.innerHTML = '';
-      arr[index].name = '';
-      console.log(arr[index].name);
-      if(arr[arr.findIndex(obj => obj.id == '' + (x - 1) + y)] !== undefined && arr[index].name == '')
-      {
-         x = x - 1;
-         arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)]
-         box = document.getElementById('' + x + y);
-
-         if(arr[arr.findIndex(obj => obj.id == '' + (x - 1) + y)] !== undefined && arr[index].name == '')
-         {
-            x = x - 1;
-            arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)]
-            box = document.getElementById('' + x + y);
-                  
-            if(arr[arr.findIndex(obj => obj.id == '' + (x - 1) + y)] !== undefined && arr[index].name == '')
-            {
-               x = x - 1;
-               arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)]
-               box = document.getElementById('' + x + y);
-            }
-         }
-      }
-      box.innerHTML = 2;
-      arr[index].name = box.innerHTML;
-      console.log(arr);
-   }
-
-   if (e.keyCode == '40') // down
-   {
-      box.innerHTML = '';
-      arr[index].name = '';
-      if(arr[arr.findIndex(obj => obj.id == '' + (x + 1) + y)] !== undefined && arr[index].name == '')
-      {
-         x = x + 1;
-         arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)];
-         box = document.getElementById('' + x + y);
-
-         if(arr[arr.findIndex(obj => obj.id == '' + (x + 1) + y)] !== undefined && arr[index].name == '')
-         {
-            x = x + 1;
-            arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)];
-            box = document.getElementById('' + x + y);
-                  
-            if(arr[arr.findIndex(obj => obj.id == '' + (x + 1) + y)] !== undefined && arr[index].name == '')
-            {
-               x = x + 1;
-               arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)];
-               box = document.getElementById('' + x + y);
-            }
-         }
-      }
-      box.innerHTML = 2;
-      arr[index].name = box.innerHTML;
-      console.log(arr)
-   }
-   
-   if (e.keyCode == '37') 
-   {
-      box.innerHTML = '';
-      arr[index].name = '';
-      if(arr[arr.findIndex(obj => obj.id == '' + x + (y - 1))] !== undefined && arr[index].name == '')
-      {
-         y = y - 1;
-         arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)]
-         box = document.getElementById('' + x + y);
-
-         if(arr[arr.findIndex(obj => obj.id == '' + x + (y - 2))] !== undefined && arr[index].name == '')
-         {
-            y = y - 2;
-            arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)]
-            box = document.getElementById('' + x + y);
-                  
-            if(arr[arr.findIndex(obj => obj.id == '' + x + (y - 3))] !== undefined && arr[index].name == '')
-            {
-               y = y - 3;
-               arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)]
-               box = document.getElementById('' + x + y);
-            }
-         }
-      }
-      box.innerHTML = 2;
-      arr[index].name = box.innerHTML;
-      console.log(arr)
-   }
-   
-   
-   if (e.keyCode == '39') 
-   {
-      box.innerHTML = '';
-      arr[index].name = '';
-      if(arr[arr.findIndex(obj => obj.id == '' + x + (y + 1))] !== undefined && arr[index].name == '')
-      {
-         y = y + 1;
-         arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)]
-         box = document.getElementById('' + x + y);
-
-         if(arr[arr.findIndex(obj => obj.id == '' + x + (y + 2))] !== undefined && arr[index].name == '')
-         {
-            y = y + 2;
-            arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)]
-            box = document.getElementById('' + x + y);
-                  
-            if(arr[arr.findIndex(obj => obj.id == '' + x + (y + 3))] !== undefined && arr[index].name == '')
-            {
-               y = y + 3;
-               arr[index] = arr[arr.findIndex(obj => obj.id == '' + x + y)]
-               box = document.getElementById('' + x + y);
-            }
-         }
-      }
-      box.innerHTML = 2;
-      arr[index].name = box.innerHTML;
-      console.log(arr)
-   }
-   console.log(x, y);
 }
-}
+
+   function checkKey(e) 
+   {
+      e = e || window.event;
+      if(e.keyCode == leftKeyCode ||
+         e.keyCode == rightKeyCode ||
+         e.keyCode == upKeyCode ||
+         e.keyCode == downKeyCode)
+      {
+
+      switch(e.keyCode)
+      {
+         case leftKeyCode:
+            
+            for(let x = 0; x < arr.length; x++)
+            {
+               for(let y = 0; y < arr[x].length; y++)
+               {
+                  if(arr[x][y].name != '')
+                  {
+                     let symb = arr[x][y].name;
+                     arr[x][y].name = ''; 
+                     let tempY = y;
+                      
+                     //  let res;
+                     
+                     while(tempY > 0 && arr[x][tempY - 1].name == '')
+                     { 
+                        
+                         tempY--;
+                        
+                     }
+                     arr[x][tempY].name = symb;
+                     if(tempY > 0 && 
+                        arr[x][tempY].name == arr[x][tempY - 1].name)
+                     {
+                        value = (+arr[x][tempY].name * 2).toString();
+                        arr[x][tempY - 1].name = value;
+                        arr[x][tempY].name = '';
+                        
+                     }
+
+                     
+                     
+                  }
+               }
+            }
+         break;
+
+         case rightKeyCode:
+            
+            for(let x = arr.length - 1; x >= 0; x--)
+            {
+               for(let y = arr[x].length - 1; y >= 0; y--)
+               {
+                  if(arr[x][y].name != '')
+                  {
+                     let symb = arr[x][y].name;
+                     arr[x][y].name = ''; 
+                     let tempY = y;
+                     while(tempY < 3 && arr[x][tempY + 1].name == '')
+                     {
+                        tempY++;
+                     }  
+                     arr[x][tempY].name = symb;
+
+                     if(tempY < 3 && 
+                        arr[x][tempY].name == arr[x][tempY + 1].name)
+                     {
+                        value = (+arr[x][tempY].name * 2).toString();
+                        arr[x][tempY + 1].name = value;
+                        arr[x][tempY].name = '';
+                        
+                     }
+                  }
+               }
+            }
+         break;
+
+         case upKeyCode:
+            
+         for(let x = 0; x < arr.length; x++)
+            {
+               for(let y = 0; y < arr[x].length; y++)
+               {
+                  if(arr[x][y].name != '')
+                  {
+                     let symb = arr[x][y].name;
+                     arr[x][y].name = ''; 
+                     let tempX = x;
+                     while(tempX > 0 && arr[tempX - 1][y].name == '')
+                     {
+                        tempX--;
+                     }  
+                     arr[tempX][y].name = symb;
+
+                     if(tempX > 0 && 
+                        arr[tempX][y].name == arr[tempX - 1][y].name)
+                     {
+                        value = (+arr[tempX][y].name * 2).toString();
+                        arr[tempX - 1][y].name = value;
+                        arr[tempX][y].name = '';
+                       
+                     }
+                  }
+               }
+            }
+         break;
+         
+         case downKeyCode:
+            for(let x = arr.length - 1; x >= 0; x--)
+            {
+               for(let y = arr[x].length - 1; y >= 0; y--)
+               {
+                  if(arr[x][y].name != '')
+                  {
+                     let symb = arr[x][y].name;
+                     arr[x][y].name = ''; 
+                     let tempX = x;
+                     while(tempX < 3 && arr[tempX + 1][y].name == '')
+                     {
+                        tempX++;
+                     }  
+                     arr[tempX][y].name = symb;
+
+                     if(tempX < 3 && 
+                        arr[tempX][y].name == arr[tempX + 1][y].name)
+                     {
+                        value = (+arr[tempX][y].name * 2).toString();
+                        arr[tempX + 1][y].name = value;
+                        arr[tempX][y].name = '';
+                        
+                     }
+
+                  }
+               }
+            }
+            while(x < 3 && arr[x + 1][y].name == '')
+            {
+               x++;
+            }
+         break;
+      }
+      }
+      createElements()
+      updateTable();
+   }
+   
+
+
