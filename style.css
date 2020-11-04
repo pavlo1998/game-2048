@@ -1,6 +1,6 @@
 td{
-   width: 75px;
-   height: 75px;
+   width: 100px;
+   height: 100px;
    border: 2px solid black;
    
 }
@@ -8,6 +8,7 @@ td{
 table{
    border: 2px solid grey;
    border-radius: 3px;
+   background-color: violet;
 }
 td{
    border-radius: 3px;
@@ -29,4 +30,8 @@ td{
 #scores{
    position: absolute;
    top: 17px;
+}
+#newBest{
+   position: absolute;
+   top: 70px;
 }

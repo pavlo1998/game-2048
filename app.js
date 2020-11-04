@@ -93,20 +93,46 @@ let box;
 let random;
 let a;
 let r;
+let bestScore;
+
+window.onload = function(){
+   x = Math.floor(Math.random() * 4);
+   y = Math.floor(Math.random() * 4);
+   box = document.getElementById('' + x + y);
+   box.innerHTML = 2;
+   arr[x][y].name = box.innerHTML;
+   box.style.backgroundColor = 'grey'
+}
 
 function createElements(){
-
-   
 
    for(let x = 0; x < arr.length; x++){
       for(let y = 0; y < arr[x].length; y++){
          if(arr[x][y].name == ''){
             array.push({x: x, y: y})
+            
          }
       }
    }
 
 r = Math.floor(Math.random() * array.length);
+if(array.length == 0){
+   alert('Game over! Good luck next time!')
+   for(let x = 0; x < arr.length; x++){
+      for(let y = 0; y < arr[x].length; y++){
+         bestScore = document.getElementById('newBest');
+         if(+score.innerHTML > +bestScore.innerHTML){
+            bestScore.innerHTML = score.innerHTML
+         }
+         arr[x][y].name = '';
+         document.getElementById('' + x + y).innerHTML = ''; 
+         document.getElementById('' + x + y).style.backgroundColor = 'white';
+      }
+   }
+   score.innerHTML = '0';
+   createElements();
+}
+else{
 x = array[r].x;
 y = array[r].y;
 box = document.getElementById('' + x + y);
@@ -128,17 +154,31 @@ a = box.innerHTML;
 arr[x][y].name = box.innerHTML;
 
 array = [];
-document.onkeydown = checkKey;
+
 }
 
+let button = document.getElementById('restart');
+button.onclick = function(){
+   for(let x = 0; x < arr.length; x++){
+      for(let y = 0; y < arr[x].length; y++){
+         bestScore = document.getElementById('newBest');
+         if(+score.innerHTML > +bestScore.innerHTML){
+            bestScore.innerHTML = score.innerHTML
+         }
+         arr[x][y].name = '';
+         document.getElementById('' + x + y).innerHTML = ''; 
+         document.getElementById('' + x + y).style.backgroundColor = 'white';
+      }
+   }
+   score.innerHTML = '0';
+   createElements();
+}
+
+}
+document.onkeydown = checkKey;
    function checkKey(e) 
    {
       e = e || window.event;
-      if(e.keyCode == leftKeyCode ||
-         e.keyCode == rightKeyCode ||
-         e.keyCode == upKeyCode ||
-         e.keyCode == downKeyCode)
-      {
 
       switch(e.keyCode)
       {
@@ -153,9 +193,7 @@ document.onkeydown = checkKey;
                      let symb = arr[x][y].name;
                      arr[x][y].name = ''; 
                      let tempY = y;
-                      
-                     //  let res;
-                     
+
                      while(tempY > 0 && arr[x][tempY - 1].name == '')
                      { 
                         
@@ -171,12 +209,10 @@ document.onkeydown = checkKey;
                         arr[x][tempY].name = '';
                         
                      }
-
-                     
-                     
                   }
                }
             }
+            createElements()
          break;
 
          case rightKeyCode:
@@ -207,6 +243,7 @@ document.onkeydown = checkKey;
                   }
                }
             }
+            createElements()
          break;
 
          case upKeyCode:
@@ -237,8 +274,8 @@ document.onkeydown = checkKey;
                   }
                }
             }
+            createElements()
          break;
-         
          case downKeyCode:
             for(let x = arr.length - 1; x >= 0; x--)
             {
@@ -266,17 +303,17 @@ document.onkeydown = checkKey;
 
                   }
                }
+               
             }
-            while(x < 3 && arr[x + 1][y].name == '')
-            {
-               x++;
-            }
+            createElements()
+         
+         break;
+         default:
+            
          break;
       }
-      }
-      createElements()
+      
+      
       updateTable();
    }
    
-
-
