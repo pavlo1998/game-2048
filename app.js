@@ -31,7 +31,7 @@ function updateTable()
             box.innerHTML = arr[x][y].name;
             switch(arr[x][y].name){
                case '2':
-                  box.style.backgroundColor = 'grey'
+                  box.style.backgroundColor = '#eef0d8'
                   
                   break;
                case '4':
@@ -101,7 +101,7 @@ window.onload = function(){
    box = document.getElementById('' + x + y);
    box.innerHTML = 2;
    arr[x][y].name = box.innerHTML;
-   box.style.backgroundColor = 'grey'
+   box.style.backgroundColor = '#eef0d8'
 }
 
 function createElements(){
@@ -141,7 +141,7 @@ random == 0 ? box.innerHTML = 2 : box.innerHTML = 4;
 switch(box.innerHTML)
 {
    case '2':
-      box.style.backgroundColor = 'grey'
+      box.style.backgroundColor = '#eef0d8'
       break;
    case '4':
       box.style.backgroundColor = '#b3b3af'
